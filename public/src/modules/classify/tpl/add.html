@@ -10,11 +10,18 @@
 		                <input name="name" class="weui-input" type="text" placeholder="名称" ng-model="vm.form.name" required>
 		            </div>
 		        </div>
+		        <div class="weui-cell weui-cell_switch">
+	                <div class="weui-cell__bd"><label class="weui-label">显示</label></div>
+	                <div class="weui-cell__ft">
+	                    <input name="is_show" class="weui-switch" type="checkbox" ng-model="vm.form.is_show">
+	                </div>
+	            </div>
 		        <div class="weui-cell">
 		            <div class="weui-cell__bd">
 		                <textarea name="remark" class="weui-textarea" placeholder="简介" rows="6" ng-model="vm.form.remark" required></textarea>
 		            </div>
 		        </div>
+
 		    </div>
 		    <div class="weui-btn-area">
 		        <button type="submit" class="weui-btn weui-btn_primary">保存</button>
