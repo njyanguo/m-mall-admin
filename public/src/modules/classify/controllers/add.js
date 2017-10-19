@@ -25,7 +25,7 @@ class Ctrl extends RestBase{
         console.log(this.classify);
         console.log("+++++++++++++++++");
         this.classify.save(this.form, {
-            callback: () => this.$state.go(s'web.clasify.list')
+            callback: () => this.$state.go('web.clasify.list')
         })
     }
 }
