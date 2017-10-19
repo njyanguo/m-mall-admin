@@ -82,6 +82,23 @@ function Router($stateProvider, $ocLazyLoadProvider) {
                 }
             }
         })
+
+        .state('web.classify.detail', {
+            tabsHidden: true,
+            url: '/{id}/detail',
+            views: {
+                'tab-admin': {
+                    templateProvider: ['$q', ($q) => {
+                        return $q((resolve) => {
+                            require.ensure([], () => {
+                                resolve(require('html!./tpl/add.html'))
+                            }, 'web.add.html')
+                        })
+                    }],
+                    controller: 'ClassifyEditCtrl as vm'
+                }
+            }
+        })
 }
 
 Router.$inject = [
