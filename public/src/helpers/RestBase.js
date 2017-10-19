@@ -50,9 +50,8 @@ class Ctrl{
 		}
 		
 		this[this.$$model].save = (params = {}, options = {}) => {
+			console.log(this[this.$$model])
 			console.time(`Post resource`)
-			console.log(params)
-			console.log(this.$$model)
 			this.$$Resource.save(params).$promise
 			.then(data => {
 				console.timeEnd(`Post resource`)
