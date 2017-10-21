@@ -14,16 +14,12 @@ class Ctrl extends RestBase{
         this.form = {
             name  : null,
             remark: null,
-            is_show: null,
+            is_show: !1,
         }
     }
 
     submitForm(isValid) {
         if (!isValid) return
-        console.log(this.form);
-        console.log("+++++++++++++++++");
-        console.log(this.classify);
-        console.log("+++++++++++++++++");
         this.classify.save(this.form, {
             callback: () => this.$state.go('web.classify.list')
         })

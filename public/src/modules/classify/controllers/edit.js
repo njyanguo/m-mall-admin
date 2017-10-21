@@ -9,6 +9,7 @@ class Ctrl extends RestBase{
     init() {
         this.initForm()
         this.renderHtml()
+        
     }
 
     renderHtml() {
@@ -21,6 +22,7 @@ class Ctrl extends RestBase{
                     id    : detail._id,
                     name  : detail.name,
                     remark: detail.remark,
+                    is_show: detail.is_show,
                 }
             }
         })
@@ -30,6 +32,7 @@ class Ctrl extends RestBase{
         this.form = {
             name  : null,
             remark: null,
+            is_show: !1,
         }
     }
 

@@ -91,8 +91,8 @@ function Router($stateProvider, $ocLazyLoadProvider) {
                     templateProvider: ['$q', ($q) => {
                         return $q((resolve) => {
                             require.ensure([], () => {
-                                resolve(require('html!./tpl/add.html'))
-                            }, 'web.add.html')
+                                resolve(require('html!./tpl/detail.html'))
+                            }, 'web.detail.html')
                         })
                     }],
                     controller: 'ClassifyEditCtrl as vm'

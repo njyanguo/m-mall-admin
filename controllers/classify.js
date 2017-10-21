@@ -84,7 +84,7 @@ class Ctrl{
 
 		Promise.all([
 			this.model.countAsync(query), 
-			this.model.getAll(query, fields, options), 
+			this.model.getAllShow(query, fields, options), 
 		])
 		.then(docs => {
 			res.tools.setJson(0, '调用成功', {
@@ -170,7 +170,8 @@ class Ctrl{
 	post(req, res, next) {
 		const body = {
 			name  : req.body.name, 
-			remark: req.body.remark, 
+			remark: req.body.remark,
+			is_show: req.body.is_show, 
 		}
 
 		this.model.post(body)
@@ -218,6 +219,7 @@ class Ctrl{
 		const body = {
 			name  : req.body.name, 
 			remark: req.body.remark, 
+			is_show: req.body.is_show,
 		}
 
 		this.model.put(query, body)
