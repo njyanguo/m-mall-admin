@@ -7,7 +7,7 @@ class RestBase extends FeatureBase{
 
 	/**
 	 * 获取资源列表
-	 * @param  {Object} query   
+	 * @param  {Object} query 查询条件  
 	 * @param  {Object} fields  
 	 * @param  {Object} options 
 	 * @return {Function}         
@@ -17,12 +17,12 @@ class RestBase extends FeatureBase{
 		const limit = Number(options.limit) || 10
 		const skip  = (page - 1) * limit
 		const sort  = options.sort || {create_at: -1}
-
+		
 		return this.model.findAsync(query, fields, {
 			skip : skip, 
 			limit: limit, 
 			sort : sort, 
-		})
+		}) 
 	}
 
 	/**

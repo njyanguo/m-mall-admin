@@ -1,10 +1,10 @@
 import proxy from '../proxy'
 
-class Ctrl{
+class Ctrl {
 	constructor(app) {
 		Object.assign(this, {
-			app, 
-			model: proxy.classify, 
+			app,
+			model: proxy.classify,
 		})
 
 		this.init()
@@ -32,7 +32,7 @@ class Ctrl{
 	 * @apiDefine Header
 	 * @apiHeader {String} Authorization jsonwebtoken
 	 */
-	
+
 	/**
 	 * @apiDefine Success
 	 * @apiSuccess {Object} meta 状态描述
@@ -40,7 +40,7 @@ class Ctrl{
 	 * @apiSuccess {String} meta.message 标识信息
 	 * @apiSuccess {Object} data 数据内容
 	 */
-	
+
 	/**
 	 * @api {get} /classify 列出所有资源
 	 * @apiDescription 列出所有资源
@@ -71,30 +71,36 @@ class Ctrl{
 	 *       	"update_at": "update_at"
 	 *       }]
 	 *     }
-	 */	
+	 */
 	getAll(req, res, next) {
-		const query = {}
+		let query = {}
+		// 增加一个微信小程序端的首页显示功能
+		if (req.query.is_show != undefined) {
+			query = {
+				is_show: Boolean(req.query.is_show),
+			}
+		}
 
 		const fields = {}
 
 		const options = {
-			page : req.query.page, 
-			limit: req.query.limit, 
+			page: req.query.page,
+			limit: req.query.limit,
 		}
 
 		Promise.all([
-			this.model.countAsync(query), 
-			this.model.getAllShow(query, fields, options), 
-		])
-		.then(docs => {
-			res.tools.setJson(0, '调用成功', {
-				items   : docs[1], 
-				paginate: res.paginate(Number(options.page), Number(options.limit), docs[0]), 
+				this.model.countAsync(query),
+				this.model.getAll(query, fields, options),
+			])
+			.then(docs => {
+				res.tools.setJson(0, '调用成功', {
+					items: docs[1],
+					paginate: res.paginate(Number(options.page), Number(options.limit), docs[0]),
+				})
 			})
-		})
-		.catch(err => next(err))
+			.catch(err => next(err))
 	}
-	
+
 	/**
 	 * @api {get} /classify/:id 获取某个指定资源的信息
 	 * @apiDescription 获取某个指定资源的信息
@@ -133,11 +139,11 @@ class Ctrl{
 		const fields = {}
 
 		this.model.get(query, fields)
-		.then(doc => {
-			if (!doc) return res.tools.setJson(1, '资源不存在或已删除')
-			return res.tools.setJson(0, '调用成功', doc)
-		})
-		.catch(err => next(err))
+			.then(doc => {
+				if (!doc) return res.tools.setJson(1, '资源不存在或已删除')
+				return res.tools.setJson(0, '调用成功', doc)
+			})
+			.catch(err => next(err))
 	}
 
 	/**
@@ -169,14 +175,16 @@ class Ctrl{
 	 */
 	post(req, res, next) {
 		const body = {
-			name  : req.body.name, 
+			name: req.body.name,
 			remark: req.body.remark,
-			is_show: req.body.is_show, 
+			is_show: req.body.is_show,
 		}
 
 		this.model.post(body)
-		.then(doc => res.tools.setJson(0, '新增成功', {_id: doc._id}))
-		.catch(err => next(err))
+			.then(doc => res.tools.setJson(0, '新增成功', {
+				_id: doc._id
+			}))
+			.catch(err => next(err))
 	}
 
 	/**
@@ -217,17 +225,17 @@ class Ctrl{
 		}
 
 		const body = {
-			name  : req.body.name, 
-			remark: req.body.remark, 
+			name: req.body.name,
+			remark: req.body.remark,
 			is_show: req.body.is_show,
 		}
 
 		this.model.put(query, body)
-		.then(doc => {
-			if (!doc) return res.tools.setJson(1, '资源不存在或已删除')
-			return res.tools.setJson(0, '更新成功', doc)
-		})
-		.catch(err => next(err))
+			.then(doc => {
+				if (!doc) return res.tools.setJson(1, '资源不存在或已删除')
+				return res.tools.setJson(0, '更新成功', doc)
+			})
+			.catch(err => next(err))
 	}
 
 	/**
@@ -258,13 +266,13 @@ class Ctrl{
 		const query = {
 			_id: req.params.id
 		}
-		
+
 		this.model.delete(query)
-		.then(doc => {
-			if (!doc) return res.tools.setJson(1, '资源不存在或已删除')
-			return res.tools.setJson(0, '删除成功')
-		})
-		.catch(err => next(err))
+			.then(doc => {
+				if (!doc) return res.tools.setJson(1, '资源不存在或已删除')
+				return res.tools.setJson(0, '删除成功')
+			})
+			.catch(err => next(err))
 	}
 }
 
