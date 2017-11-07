@@ -1,0 +1,21 @@
+<ion-view view-title="所有商品类别">
+    <ion-nav-buttons side="right">
+        <a class="button button-clear icon icon ion-ios-plus-empty" ui-sref="web.goodsTypes.add({goods_id: goods_id})"></a>
+    </ion-nav-buttons>
+    <ion-content ng-class="{'no-footer': tabsHidden}">
+        <ion-refresher pulling-icon="ion-arrow-down-c" pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
+        </ion-refresher>
+        <ion-list>
+            <ion-item ng-repeat="item in vm.goodsTypes.items" ui-sref="web.goodsTypes.detail({id: item._id})">
+                <h2>{{ item.name }}</h2>
+                <p>{{ vm.goods.items.name }}</p>
+                <i class="badge">{{item.quantity - item.saleName}}/{{ item.quantity }}</i>
+                <ion-option-button class="button-calm icon ion-edit" ui-sref="web.goodsTypes.edit({id: item._id})"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-close" on-tap="vm.goodsTypes.delete({id: item._id})"></ion-option-button>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="vm.goodsTypes.paginate.hasNext" on-infinite="vm.loadMore()">
+        </ion-infinite-scroll>
+        <prompt-message ng-if="!vm.goodsTypes.items.length" text="暂无商品类别"></prompt-message>
+    </ion-content>
+</ion-view>

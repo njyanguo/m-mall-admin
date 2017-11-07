@@ -2,10 +2,11 @@ export default {
 	secret: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 	mongo: {
 		development: {
-			connectionString: 'mongodb://127.0.0.1:27017/mall'
+			connectionString: 'mongodb://127.0.0.1:27017/mall'//本地开发环境
+			//connectionString: 'mongodb://192.168.1.105:27017/mall'
 		},
 		production: {
-			connectionString: 'mongodb://127.0.0.1:27017/mall'
+			connectionString: 'mongodb://192.168.1.105:27017/mall'
 		}
 	},
 	redis: {

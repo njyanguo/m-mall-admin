@@ -86,6 +86,7 @@ class Ctrl {
 		const options = {
 			page: req.query.page,
 			limit: req.query.limit,
+			sort: {sort : req.query.sort || 1},
 		}
 
 		Promise.all([
@@ -178,6 +179,7 @@ class Ctrl {
 			name: req.body.name,
 			remark: req.body.remark,
 			is_show: req.body.is_show,
+			sort: req.body.sort,
 		}
 
 		this.model.post(body)
@@ -228,6 +230,7 @@ class Ctrl {
 			name: req.body.name,
 			remark: req.body.remark,
 			is_show: req.body.is_show,
+			sort: req.body.sort,
 		}
 
 		this.model.put(query, body)

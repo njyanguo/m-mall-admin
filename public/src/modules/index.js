@@ -6,6 +6,7 @@ import classify from './classify/index'
 import goods from './goods/index'
 import order from './order/index'
 import help from './help/index'
+import goodsTypes from './goodsTypes/index'
 
 angular
     .module('App', [
@@ -17,4 +18,5 @@ angular
         goods.name,
         order.name,
         help.name,
+        goodsTypes.name,
     ])

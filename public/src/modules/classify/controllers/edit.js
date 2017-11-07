@@ -22,6 +22,7 @@ class Ctrl extends RestBase{
                     id    : detail._id,
                     name  : detail.name,
                     remark: detail.remark,
+                    sort   : detail.sort,
                     is_show: detail.is_show,
                 }
             }
@@ -33,6 +34,7 @@ class Ctrl extends RestBase{
             name  : null,
             remark: null,
             is_show: !1,
+            sort: 99,
         }
     }
 

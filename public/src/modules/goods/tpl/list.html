@@ -9,7 +9,8 @@
 			<ion-item ng-repeat="item in vm.goods.items" ui-sref="web.goods.detail({id: item._id})">
 				<h2>{{ item.name }}</h2>
 				<p>{{ item.remark }}</p>
-				<i class="badge">{{ item.price }}</i>
+				<i class="badge">￥{{ item.price }}</i>
+				<ion-option-button class="button-stable icon ion-clipboard" ui-sref="web.goodsTypes.list({goods_id: item._id})"></ion-option-button>
 				<ion-option-button class="button-calm icon ion-edit" ui-sref="web.goods.edit({id: item._id})"></ion-option-button>
 				<ion-option-button class="button-assertive icon ion-close" on-tap="vm.goods.delete({id: item._id})"></ion-option-button>
 			</ion-item>
